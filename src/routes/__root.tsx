@@ -5,6 +5,7 @@ import {
 } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { TanStackDevtools } from "@tanstack/react-devtools";
+import Navbar from "../components/Navbar";
 
 import ClerkProvider from "../integrations/clerk/provider";
 
@@ -55,7 +56,16 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 			</head>
 			<body>
 				<ClerkProvider>
-					{children}
+					<div id="root-layout">
+						<header>
+							<div className="frame">
+								<Navbar />
+							</div>
+						</header>
+						<div>
+							<main>{children}</main>
+						</div>
+					</div>
 					<TanStackDevtools
 						config={{
 							position: "bottom-right",
