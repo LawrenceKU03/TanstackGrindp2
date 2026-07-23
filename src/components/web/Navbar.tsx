@@ -1,12 +1,15 @@
 import { Button } from "@radix-ui/themes";
 import { Link } from "@tanstack/react-router";
+
 const index = () => {
 	return (
 		<div className="sticky top-0 z-50 backdrop-blur-2xl py-4 font-['Space_Grotesk'] bg-white">
 			<div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
 				<div className="flex h-16 max-w-6xl items-center justify-between px-4">
 					<img src="logo512.png" alt="tanstack" className="w-[50px] h-[50px]" />
-					<h1 className="text-lg font-semibold ml-4">Tanstack Start</h1>
+					<Link to="/">
+						<h1 className="text-lg font-semibold ml-4">Tanstack Start</h1>
+					</Link>
 				</div>
 				<div className="flex items-center gap-3">
 					<Link to="/login">
