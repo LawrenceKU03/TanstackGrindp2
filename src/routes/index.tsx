@@ -8,7 +8,7 @@ function Home() {
 	return (
 		<div className="">
 			<Navbar />
-			<Form />
+			<Form headerText="Sign Up" />
 		</div>
 	);
 }
