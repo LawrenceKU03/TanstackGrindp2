@@ -2,7 +2,7 @@ import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { TanStackDevtools } from "@tanstack/react-devtools";
 import { Theme } from "@radix-ui/themes";
-
+import Navbar from "../components/web/Navbar";
 import appCss from "../styles.css?url";
 
 export const Route = createRootRoute({
@@ -42,6 +42,8 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 				/>
 			</head>
 			<body className="bg-gray-100">
+				{" "}
+				<Navbar />
 				<Theme>{children}</Theme>
 				<TanStackDevtools
 					config={{
