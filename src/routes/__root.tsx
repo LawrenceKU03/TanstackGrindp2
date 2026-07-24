@@ -3,6 +3,8 @@ import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { TanStackDevtools } from "@tanstack/react-devtools";
 import { Theme } from "@radix-ui/themes";
 import Navbar from "../components/web/Navbar";
+import Toaster from "react-hot-toast";
+
 import appCss from "../styles.css?url";
 
 export const Route = createRootRoute({
@@ -35,7 +37,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 			<head>
 				<HeadContent />
 				<link rel="preconnect" href="https://fonts.googleapis.com" />
-				<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+				<link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
 				<link
 					href="https://fonts.googleapis.com/css2?family=Geist:ital,wght@0,100..900;1,100..900&family=Space+Grotesk:wght@300..700&display=swap"
 					rel="stylesheet"
@@ -44,6 +46,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 			<body className="bg-gray-100">
 				{" "}
 				<Navbar />
+				<Toaster />
 				<Theme>{children}</Theme>
 				<TanStackDevtools
 					config={{

@@ -1,6 +1,9 @@
 import type React from "react";
 import TextField from "./Components/TextField";
 import { useForm } from "@tanstack/react-form";
+import { authClient } from "#/lib/auth-client";
+
+import toast from "react-hot-toast";
 
 export type Form = {
 	headerText: string;
@@ -10,6 +13,7 @@ export type Form = {
 export type FormValues = {
 	username: string;
 	password: string;
+	email: string;
 	confirm_password?: string;
 };
 
@@ -19,10 +23,45 @@ const index: React.FC<Form> = ({ headerText, isLogin }) => {
 			username: "",
 			password: "",
 			confirm_password: "",
+			email: "",
 		} as FormValues,
 		onSubmit: async ({ value }) => {
 			//trigger function
-			console.log(value);
+			//
+			if (!isLogin) {
+				await authClient.signUp.email({
+					name: value.username,
+					password: value.password,
+					email: value.email,
+					callbackURL: "/",
+					fetchOptions: {
+						onSuccess: () => {
+							toast.success(
+								"Successfully signed up to the TanStack Dummy Project",
+							);
+						},
+						onError: ({ error }) => {
+							toast.error(
+								`Failed to sign up to the TanStack Dummy Project ${error.message}`,
+							);
+						},
+					},
+				});
+			} else {
+				await authClient.signIn.email({
+					password: value.password,
+					email: value.email,
+					callbackURL: "/",
+					fetchOptions: {
+						onSuccess: () => {
+							toast.success("Login Successful");
+						},
+						onError: ({ error }) => {
+							toast.error(`Login Failed ${error.message}`);
+						},
+					},
+				});
+			}
 		},
 	});
 
@@ -40,11 +79,20 @@ const index: React.FC<Form> = ({ headerText, isLogin }) => {
 					{headerText}
 				</h1>
 				<TextField
-					placeholder="Username"
-					name={"username"}
+					placeholder="Email"
+					name={"email"}
 					form={Form}
-					type="text"
+					type="email"
 				/>
+
+				{!isLogin && (
+					<TextField
+						placeholder="Username"
+						name={"username"}
+						form={Form}
+						type="text"
+					/>
+				)}
 				<TextField
 					placeholder="Password"
 					type="password"
